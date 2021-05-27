@@ -33,26 +33,26 @@ public class OrderModel {
 		    ResultSet rs = sentencia.executeQuery(sql);
 		    while (rs.next()) { // Si hay un pedido que existe
 		    Order = new Order(
-				rs.getInt("id"),
-				rs.getInt("employee_id"),
-				rs.getInt("customer_id"),
+				rs.getInt("id"),//
+				rs.getInt("employee_id"),//
+				rs.getInt("customer_id"),//
 				rs.getTimestamp("order_date"),
 				rs.getTimestamp("shipped_date"),
-				rs.getInt("shipper_id"),
-				rs.getString("ship_name"),
-				rs.getString("ship_address"),
-				rs.getString("ship_city"),
-				rs.getString("ship_state_province"),
-				rs.getString("ship_zip_postal_code"),
-				rs.getString("ship_country_region"),
-				rs.getFloat("shipping_fee"),
-				rs.getFloat("taxes"),
-				rs.getString("payment_type"),
-				rs.getTimestamp("paid_date"),
+				rs.getInt("shipper_id"),//
+				rs.getString("ship_name"),//
+				rs.getString("ship_address"),//
+				rs.getString("ship_city"),//
+				rs.getString("ship_state_province"),//
+				rs.getString("ship_zip_postal_code"),//
+				rs.getString("ship_country_region"),//
+				rs.getFloat("shipping_fee"),//
+				rs.getFloat("taxes"),//
+				rs.getString("payment_type"),//
+				rs.getTimestamp("paid_date"),//
 				rs.getString("notes"),
 				rs.getFloat("tax_rate"),
-				rs.getInt("tax_status_id"),
-				rs.getInt("status_id"));
+				rs.getInt("tax_status_id"),//
+				rs.getInt("status_id"));//
 		    };
 		    
 		} catch (SQLException e) {
