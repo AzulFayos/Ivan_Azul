@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/Ivan_Azul/clientes";
+const URL = "http://localhost:8080/Ivan_Azul/pedidos";
 const myModal = new bootstrap.Modal(document.getElementById("idModal")); // Para los mensajes de error y avisos
 
 window.onload = init;
@@ -7,11 +7,11 @@ function init() {
   if (window.location.search != "") {
     const queryStr = window.location.search.substring(1);
     const parametro = queryStr.split("=");
-    idcliente = parametro[1];
+    idpedido = parametro[1];
 
-    rellenaCliente(idcliente);
+    rellenapedido(idpedido);
   } else {
-    document.getElementById("idId").value = "Nuevo Cliente";
+    document.getElementById("idId").value = "Nuevo pedido";
     document.getElementById("idSalvar").disabled = false;
   }
 
@@ -21,13 +21,13 @@ function init() {
     volver();
   });
 
-  // El boton de salvar sólo está activo cuando se carge los datos de un cliente
-  // document.getElementById("idSalvar").addEventListener("click", salvarCliente);
-  document.getElementById("idFormCliente").addEventListener("submit", salvarCliente);
+  // El boton de salvar sólo está activo cuando se carge los datos de un pedido
+  // document.getElementById("idSalvar").addEventListener("click", salvarpedido);
+  document.getElementById("idFormpedido").addEventListener("submit", salvarpedido);
 }
 
-function rellenaCliente(idcliente) {
-  const peticionHTTP = fetch(URL + "/" + idcliente);
+function rellenapedido(idpedido) {
+  const peticionHTTP = fetch(URL + "/" + idpedido);
 
   peticionHTTP
     .then((respuesta) => {
@@ -35,35 +35,35 @@ function rellenaCliente(idcliente) {
         return respuesta.json();
       } else throw new Error("Return not ok");
     })
-    .then((cliente) => {
+    .then((pedido) => {
       let inputs = document.getElementsByTagName("input");
       for (let input of inputs) {
-        input.value = cliente[input.name] ?? "";
+        input.value = pedido[input.name] ?? "";
       }
       document.getElementById("idSalvar").disabled = false;
     })
     .catch((error) => {
-      muestraMsg("¡M**rd!", "No he podido recupera este  Cliente " + error, false);
+      muestraMsg("¡M**rd!", "No he podido recupera este  pedido " + error, false);
     });
 }
 
-function salvarCliente(evt) {
+function salvarpedido(evt) {
   evt.preventDefault();
 
   // Creo un array con todo los datos formulario
-  let cliente = {};
+  let pedido = {};
 
-  // Relleno un array cliente con todos los campos del formulario
+  // Relleno un array pedido con todos los campos del formulario
   let inputs = document.getElementsByTagName("input");
   for (let input of inputs) {
-    cliente[input.name] = input.value;
+    pedido[input.name] = input.value;
   }
 
-  if (cliente.id == "Nuevo Cliente") { // Añadimos cliente
-    delete cliente.id;
+  if (pedido.id == "Nuevo pedido") { // Añadimos pedido
+    delete pedido.id;
     opciones = {
       method: "POST", // Añadimos un registro a la BBDD
-      body: JSON.stringify(cliente), // Paso el array cliente a un objeto que luego puedo jsonear
+      body: JSON.stringify(pedido), // Paso el array pedido a un objeto que luego puedo jsonear
       headers: {
         "Content-Type": "application/json",
       },
@@ -71,7 +71,7 @@ function salvarCliente(evt) {
   } else {  // Modificamos
     opciones = {
       method: "PUT", // Modificamos la BBDD
-      body: JSON.stringify(cliente), // Paso el array cliente a un objeto que luego puedo jsonear
+      body: JSON.stringify(pedido), // Paso el array pedido a un objeto que luego puedo jsonear
       headers: {
         "Content-Type": "application/json",
       },

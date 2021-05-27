@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/Ivan_Azul/clientes";
+const URL = "http://localhost:8080/Ivan_Azul/productos";
 const myModal = new bootstrap.Modal(document.getElementById("idModal")); // Para los mensajes de error y avisos
 
 window.onload = init;
@@ -7,11 +7,11 @@ function init() {
   if (window.location.search != "") {
     const queryStr = window.location.search.substring(1);
     const parametro = queryStr.split("=");
-    idcliente = parametro[1];
+    idproducto = parametro[1];
 
-    rellenaCliente(idcliente);
+    rellenaproducto(idproducto);
   } else {
-    document.getElementById("idId").value = "Nuevo Cliente";
+    document.getElementById("idId").value = "Nuevo producto";
     document.getElementById("idSalvar").disabled = false;
   }
 
@@ -21,13 +21,13 @@ function init() {
     volver();
   });
 
-  // El boton de salvar sólo está activo cuando se carge los datos de un cliente
-  // document.getElementById("idSalvar").addEventListener("click", salvarCliente);
-  document.getElementById("idFormCliente").addEventListener("submit", salvarCliente);
+  // El boton de salvar sólo está activo cuando se carge los datos de un producto
+  // document.getElementById("idSalvar").addEventListener("click", salvarproducto);
+  document.getElementById("idFormproducto").addEventListener("submit", salvarproducto);
 }
 
-function rellenaCliente(idcliente) {
-  const peticionHTTP = fetch(URL + "/" + idcliente);
+function rellenaproducto(idproducto) {
+  const peticionHTTP = fetch(URL + "/" + idproducto);
 
   peticionHTTP
     .then((respuesta) => {
@@ -35,35 +35,35 @@ function rellenaCliente(idcliente) {
         return respuesta.json();
       } else throw new Error("Return not ok");
     })
-    .then((cliente) => {
+    .then((producto) => {
       let inputs = document.getElementsByTagName("input");
       for (let input of inputs) {
-        input.value = cliente[input.name] ?? "";
+        input.value = producto[input.name] ?? "";
       }
       document.getElementById("idSalvar").disabled = false;
     })
     .catch((error) => {
-      muestraMsg("¡M**rd!", "No he podido recupera este  Cliente " + error, false);
+      muestraMsg("¡M**rd!", "No he podido recupera este  producto " + error, false);
     });
 }
 
-function salvarCliente(evt) {
+function salvarproducto(evt) {
   evt.preventDefault();
 
   // Creo un array con todo los datos formulario
-  let cliente = {};
+  let producto = {};
 
-  // Relleno un array cliente con todos los campos del formulario
+  // Relleno un array producto con todos los campos del formulario
   let inputs = document.getElementsByTagName("input");
   for (let input of inputs) {
-    cliente[input.name] = input.value;
+    producto[input.name] = input.value;
   }
 
-  if (cliente.id == "Nuevo Cliente") { // Añadimos cliente
-    delete cliente.id;
+  if (producto.id == "Nuevo producto") { // Añadimos producto
+    delete producto.id;
     opciones = {
       method: "POST", // Añadimos un registro a la BBDD
-      body: JSON.stringify(cliente), // Paso el array cliente a un objeto que luego puedo jsonear
+      body: JSON.stringify(producto), // Paso el array producto a un objeto que luego puedo jsonear
       headers: {
         "Content-Type": "application/json",
       },
@@ -71,7 +71,7 @@ function salvarCliente(evt) {
   } else {  // Modificamos
     opciones = {
       method: "PUT", // Modificamos la BBDD
-      body: JSON.stringify(cliente), // Paso el array cliente a un objeto que luego puedo jsonear
+      body: JSON.stringify(producto), // Paso el array producto a un objeto que luego puedo jsonear
       headers: {
         "Content-Type": "application/json",
       },

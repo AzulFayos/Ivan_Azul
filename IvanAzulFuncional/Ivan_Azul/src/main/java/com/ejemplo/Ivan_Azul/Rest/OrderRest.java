@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 import com.ejemplo.Ivan_Azul.Entities.Order;
 import com.ejemplo.Ivan_Azul.Models.OrderModel;
 
-@Path("pedido")
+@Path("pedidos")
 public class OrderRest {
 	static OrderModel orders;
 

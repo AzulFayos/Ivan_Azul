@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/Ivan_Azul/clientes";
+const URL = "http://localhost:8080/Ivan_Azul/productos";
 const myModal = new bootstrap.Modal(document.getElementById("idModal")); // Para los mensajes de error y avisos
 const modalWait = new bootstrap.Modal(document.getElementById("idModalWait")); // Para los mensajes de error y avisos
 
@@ -13,58 +13,58 @@ function init() {
         return respuesta.json();
       } else throw new Error("Return not ok");
     })
-    .then((clientes) => {
-      let tblBody = document.getElementById("id_tblClientes");
-      for (const cliente of clientes) {
+    .then((producto) => {
+      let tblBody = document.getElementById("id_tblProductos");
+      for (const products of producto) {
         let fila = document.createElement("tr");
         let elemento = document.createElement("td");
-        elemento.innerHTML = cliente.id;
+        elemento.innerHTML = products.id;
         fila.appendChild(elemento);
         elemento = document.createElement("td");
-        elemento.innerHTML = cliente.firstName;
+        elemento.innerHTML = products.product_name;
         fila.appendChild(elemento);
         elemento = document.createElement("td");
-        elemento.innerHTML = cliente.lastName;
+        elemento.innerHTML = products.standard_cost;
         fila.appendChild(elemento);
         elemento = document.createElement("td");
-        elemento.innerHTML = cliente.company;
+        elemento.innerHTML = products.list_price;
         fila.appendChild(elemento);
         elemento = document.createElement("td");
-        elemento.innerHTML = cliente.businessPhone ?? "";
+        elemento.innerHTML = products.category ?? "";
         fila.appendChild(elemento);
         elemento = document.createElement("td");
-        elemento.innerHTML = cliente.mobilePhone ?? "";
+        elemento.innerHTML = products.quantity_per_unit ?? "";
         fila.appendChild(elemento);
         elemento = document.createElement("td");
         elemento.innerHTML =
-          `<button class="btn btn-link" onclick="editaCliente(${cliente.id})"><i class="bi-pencil"></i></button>` +
-          `<button style="color:red;" class="btn btn-link"  onclick="borrarCliente(${cliente.id})"><i class="bi-x-circle"></i></button>`;
+          `<button class="btn btn-link" onclick="editaproducto(${products.id})"><i class="bi-pencil"></i></button>` +
+          `<button style="color:red;" class="btn btn-link"  onclick="borrarproducto(${products.id})"><i class="bi-x-circle"></i></button>`;
         fila.appendChild(elemento);
 
         tblBody.appendChild(fila);
       }
 
-      // Todo ha ido bien hast aquí, habilito el boton de añadir cliente
+      // Todo ha ido bien hast aquí, habilito el boton de añadir producto
 
-      document.getElementById("idAddCliente").addEventListener("click", addCliente);
+      document.getElementById("idAddproductos").addEventListener("click", addproducto);
     })
     .catch((error) => {
-      muestraMsg("¡M**rd!", "¡No he podido recuperar el listado de clientes!<br>" + error, false, "error");
+      muestraMsg("¡M**rd!", "¡No he podido recuperar el listado de producto!<br>" + error, false, "error");
     });
 }
 
-function editaCliente(idcliente) {
-  window.location.href = `editarCliente.html?idcliente=${idcliente}`;
+function editaproducto(idproducto) {
+  window.location.href = `editarproducto.html?idproducto=${idproducto}`;
 }
 
-function addCliente() {
-  window.location.href = "editarCliente.html";
+function addproducto() {
+  window.location.href = "editarproducto.html";
 }
 
-function borrarCliente(idcliente) {
+function borrarproducto(idproducto) {
   muestraMsg(
     "¡Atención!",
-    `¿Estas seguró de querer borrar el cliente ${idcliente}?`,
+    `¿Estas seguró de querer borrar el producto ${idproducto}?`,
     true,
     "question",
     "Adelante con los faroles!",
@@ -72,18 +72,18 @@ function borrarCliente(idcliente) {
   );
   document.getElementById("idMdlOK").addEventListener("click", () => {
     
-    borrarClienteAPI(idcliente);
+    borrarproductoAPI(idproducto);
   });
 }
 
-function borrarClienteAPI(idcliente) {
+function borrarproductoAPI(idproducto) {
   myModal.hide();
   modalWait.show();
   opciones = {
     method: "DELETE", // Modificamos la BBDD
   };
 
-  fetch(URL + "/" + idcliente, opciones)
+  fetch(URL + "/" + idproducto, opciones)
     .then((respuesta) => {
       if (respuesta.ok) {
         return respuesta.json();
@@ -95,7 +95,7 @@ function borrarClienteAPI(idcliente) {
     })
     .then((respuesta) => {
       modalWait.hide();
-      muestraMsg(`¡Cliente ${idcliente} Borrado!`, "¡A tomar por saco!", false, "success");
+      muestraMsg(`¡producto ${idproducto} Borrado!`, "¡A tomar por saco!", false, "success");
       document.getElementById('idMdlClose').addEventListener("click", () => {
         location.reload();
         document.getElementById('idMdlClose').removeEventListener("click");
@@ -105,8 +105,8 @@ function borrarClienteAPI(idcliente) {
     .catch((error) => {
       modalWait.hide();
       muestraMsg(
-        "Cliente NO borrado",
-        "¿Es posible que este cliente tenga algún pedido? 🤔<br>" + error,
+        "producto NO borrado",
+        "¿Es posible que este producto tenga algún pedido? 🤔<br>" + error,
         false,
         "error"
       );
