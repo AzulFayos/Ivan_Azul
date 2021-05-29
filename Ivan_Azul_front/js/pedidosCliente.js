@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/Ivan_Azul/pedidos/cliente";
+const URL = `http://localhost:8080/Ivan_Azul/pedidos/cliente/{$idcliente}`;
 const myModal = new bootstrap.Modal(document.getElementById("idModal")); // Para los mensajes de error y avisos
 const modalWait = new bootstrap.Modal(document.getElementById("idModalWait")); // Para los mensajes de error y avisos
 
@@ -18,7 +18,7 @@ function init() {
     );
   }
   function rellenaPedidos() {
-    const peticionHTTP = fetch(URL + "/" + idcliente);
+    const peticionHTTP = fetch(URL);
   
     peticionHTTP
       .then((respuesta) => {
