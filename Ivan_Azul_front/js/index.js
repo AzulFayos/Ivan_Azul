@@ -38,7 +38,8 @@ function init() {
         elemento = document.createElement("td");
         elemento.innerHTML =
           `<button class="btn btn-link" onclick="editaCliente(${cliente.id})"><i class="bi-pencil"></i></button>` +
-          `<button style="color:red;" class="btn btn-link"  onclick="borrarCliente(${cliente.id})"><i class="bi-x-circle"></i></button>`;
+          `<button style="color:red;" class="btn btn-link"  onclick="borrarCliente(${cliente.id})"><i class="bi-x-circle"></i></button>`+
+          `<button style="color:black;" class="btn btn-link"  onclick="pedidosCliente(${cliente.id})"><i class="bi bi-card-list"></i></button>`;
         fila.appendChild(elemento);
 
         tblBody.appendChild(fila);
@@ -55,6 +56,10 @@ function init() {
 
 function editaCliente(idcliente) {
   window.location.href = `editarCliente.html?idcliente=${idcliente}`;
+}
+function pedidosCliente(idcliente) {
+  window.location.href = `pedidosCliente.html?idcliente=${idcliente}`;
+  
 }
 
 function addCliente() {
