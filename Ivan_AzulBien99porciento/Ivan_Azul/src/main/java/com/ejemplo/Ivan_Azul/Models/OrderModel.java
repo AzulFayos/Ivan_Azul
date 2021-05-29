@@ -162,8 +162,10 @@ public class OrderModel {
 			Boolean resultado = false;
 			PreparedStatement ps1 = null;
 			PreparedStatement ps2 = null;
+			PreparedStatement ps3 = null;
 			String sql1 = "DELETE FROM order_details where order_id = ?";
-			String sql2 = "DELETE FROM orders where id = ?";
+			String sql2 = "DELETE FROM invoices where order_id = ?";
+			String sql3 = "DELETE FROM orders where id = ?";
 			
 			try {
 				
@@ -172,12 +174,18 @@ public class OrderModel {
 			    ps1.setInt(1, idpedido);
 
 			    resultado = (ps1.executeUpdate() > 0);
-				
+			    
 			    ps2 = conexion.prepareStatement(sql2);
 
 			    ps2.setInt(1, idpedido);
 
 			    resultado = (ps2.executeUpdate() > 0);
+				
+			    ps3 = conexion.prepareStatement(sql3);
+
+			    ps3.setInt(1, idpedido);
+
+			    resultado = (ps3.executeUpdate() > 0);
 
 			} catch (SQLException e) {
 			    System.err.println("Error al borrar pedido: " + e.getMessage());
