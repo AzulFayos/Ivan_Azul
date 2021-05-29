@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/Ivan_Azul/pedidos";
+const URL = "http://localhost:8080/Ivan_Azul/pedido";
 const myModal = new bootstrap.Modal(document.getElementById("idModal")); // Para los mensajes de error y avisos
 
 window.onload = init;

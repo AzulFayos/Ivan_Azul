@@ -102,6 +102,7 @@ public class CustomerRest {
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Integer id) {
 	Boolean clienteactualizado;
+
 	Response response;
 	try {
 	    clienteactualizado = customers.delete(id);
