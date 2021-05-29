@@ -8,7 +8,7 @@ function init() {
     const queryStr = window.location.search.substring(1);
     const parametro = queryStr.split("=");
     let idcliente = parametro[1];
-    const URL = "http://localhost:8080/Ivan_Azul/pedido/cliente/";
+    const URL = "http://localhost:8080/Ivan_Azul/pedidos/cliente/";
     rellenapedido(idcliente,URL);
   function rellenapedido(idcliente,URL) {
   const peticionHTTP = fetch(URL+ idcliente);
