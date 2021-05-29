@@ -14,7 +14,8 @@ import com.ejemplo.Ivan_Azul.Entities.Order_Details;
 
 public class Order_DetailsModel {
 
-	Connection conexion = null;
+	static Connection conexion = null;
+	//public static Integer idcliente;
 
 	public Order_DetailsModel() throws SQLException {
 		DataSource ds = DBFactory.getMySQLDataSource();
@@ -25,8 +26,7 @@ public class Order_DetailsModel {
 		Order_Details Order_Details = null;
 		Statement sentencia = null;
 
-		String sql = "SELECT `id`, `order_id`, `product_id`, `quantity`, "
-				+ "`unit_price`, `discount`, `status_id` , `date_allocated`," + "`purchase_order_id`, `inventory_id` "
+		String sql = "SELECT * "
 				+ "FROM order_details " + "WHERE id = " + id;
 
 		try {
@@ -104,8 +104,8 @@ public class Order_DetailsModel {
 		}
 
 		return resultado;
-	}
-
+	}	
+	
 	public Boolean update(Order_Details Order_Details) throws SQLException {
 		Boolean resultado = false;
 
@@ -147,10 +147,10 @@ public class Order_DetailsModel {
 		+ "`quantity`, "
 		+ "`unit_price`, "
 		+ "`discount`, "
-		+ "`status_id` , "
+		+ "`status_id`, "
 		+ "`date_allocated`,"
 		+ "`purchase_order_id`, "
-		+ "`inventory_id`, "
+		+ "`inventory_id` "
 		+ "FROM order_details ";
 
 	try {

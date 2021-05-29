@@ -14,7 +14,9 @@ import com.ejemplo.Ivan_Azul.Entities.Order;
 
 public class OrderModel {
 	
-	 Connection conexion = null;
+
+	static Connection conexion = null;
+	//public static Integer idcliente;
 
 	    public OrderModel() throws SQLException {
 		DataSource ds = DBFactory.getMySQLDataSource();
@@ -62,6 +64,48 @@ public class OrderModel {
 
 		return Order;
 	    }
+	    
+	    public Order readbyCliente(Integer customer_id) {
+		    Order Order = null;
+			Statement sentencia = null;
+
+			String sql = "SELECT * " + "FROM orders "
+				+ "WHERE customer_id = " + customer_id;
+
+			try {
+			    sentencia = conexion.createStatement();
+			    ResultSet rs = sentencia.executeQuery(sql);
+			    while (rs.next()) { // Si hay un pedido que existe
+			    Order = new Order(
+					rs.getInt("id"),
+					rs.getInt("employee_id"),
+					rs.getInt("customer_id"),
+					rs.getTimestamp("order_date"),
+					rs.getTimestamp("shipped_date"),
+					rs.getInt("shipper_id"),
+					rs.getString("ship_name"),
+					rs.getString("ship_address"),
+					rs.getString("ship_city"),
+					rs.getString("ship_state_province"),
+					rs.getString("ship_zip_postal_code"),
+					rs.getString("ship_country_region"),
+					rs.getFloat("shipping_fee"),
+					rs.getFloat("taxes"),
+					rs.getString("payment_type"),
+					rs.getTimestamp("paid_date"),
+					rs.getString("notes"),
+					rs.getFloat("tax_rate"),
+					rs.getInt("tax_status_id"),
+					rs.getInt("status_id"));
+			    };
+			    
+			} catch (SQLException e) {
+			    System.err.println("Error en read de pedidos: " + e.getMessage());
+			    return null;
+			}
+
+			return Order;
+		    }
 
 	    /**
 	     * 
@@ -116,15 +160,24 @@ public class OrderModel {
 
 	    public Boolean delete(Integer idpedido) throws SQLException {
 			Boolean resultado = false;
-
-			PreparedStatement ps = null;
-			String sql = "DELETE FROM orders where id = ?";
+			PreparedStatement ps1 = null;
+			PreparedStatement ps2 = null;
+			String sql1 = "DELETE FROM order_details where order_id = ?";
+			String sql2 = "DELETE FROM orders where id = ?";
+			
 			try {
-			    ps = conexion.prepareStatement(sql);
+				
+				ps1 = conexion.prepareStatement(sql1);
 
-			    ps.setInt(1, idpedido);
+			    ps1.setInt(1, idpedido);
 
-			    resultado = (ps.executeUpdate() > 0);
+			    resultado = (ps1.executeUpdate() > 0);
+				
+			    ps2 = conexion.prepareStatement(sql2);
+
+			    ps2.setInt(1, idpedido);
+
+			    resultado = (ps2.executeUpdate() > 0);
 
 			} catch (SQLException e) {
 			    System.err.println("Error al borrar pedido: " + e.getMessage());
@@ -197,7 +250,7 @@ public class OrderModel {
 		Statement sentencia = null;
 
 		String sql = "SELECT * " 
-			+ "FROM orders ";
+			+ "FROM orders";
 
 		try {
 		    if (filtro != null)

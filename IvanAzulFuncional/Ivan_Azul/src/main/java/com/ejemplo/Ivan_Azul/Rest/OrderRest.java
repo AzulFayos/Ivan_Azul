@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 import com.ejemplo.Ivan_Azul.Entities.Order;
 import com.ejemplo.Ivan_Azul.Models.OrderModel;
 
-@Path("pedidos")
+@Path("pedido")
 public class OrderRest {
 	static OrderModel orders;
 
@@ -57,6 +57,22 @@ public class OrderRest {
 	
 	if (orders != null) {
 	    Order order = orders.read(id);
+	    if (order != null) {
+		respuesta = Response.status(Response.Status.OK).entity(order).build();
+	    }
+	}
+	return respuesta;
+    }
+    
+    @GET
+    @Path("/cliente/{customer_id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response readbyCliente(@PathParam("customer_id") Integer customer_id) {
+	
+	Response respuesta = Response.status(Response.Status.NOT_FOUND).entity("No he encotrado").build();
+	
+	if (orders != null) {
+	    Order order = orders.readbyCliente(customer_id);
 	    if (order != null) {
 		respuesta = Response.status(Response.Status.OK).entity(order).build();
 	    }
