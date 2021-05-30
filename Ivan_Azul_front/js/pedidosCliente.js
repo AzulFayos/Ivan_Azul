@@ -101,7 +101,7 @@ function borrarpedidoAPI(idpedido) {
     method: "DELETE", // Modificamos la BBDD
   };
 
-  fetch(URL + "/" + idpedido, opciones)
+  fetch("http://localhost:8080/Ivan_Azul/pedidos" + "/" + idpedido, opciones)
     .then((respuesta) => {
       if (respuesta.ok) {
         return respuesta.json();

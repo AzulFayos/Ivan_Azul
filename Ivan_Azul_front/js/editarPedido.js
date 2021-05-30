@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/Ivan_Azul/pedido";
+const URL = "http://localhost:8080/Ivan_Azul/pedidos";
 const myModal = new bootstrap.Modal(document.getElementById("idModal")); // Para los mensajes de error y avisos
 
 window.onload = init;
@@ -23,7 +23,7 @@ function init() {
 
   // El boton de salvar sólo está activo cuando se carge los datos de un pedido
   // document.getElementById("idSalvar").addEventListener("click", salvarpedido);
-  document.getElementById("idFormpedido").addEventListener("submit", salvarpedido);
+  document.getElementById("idFormPedido").addEventListener("submit", salvarpedido);
 }
 
 function rellenapedido(idpedido) {
