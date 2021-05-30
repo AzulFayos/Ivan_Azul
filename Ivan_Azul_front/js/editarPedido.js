@@ -11,7 +11,7 @@ function init() {
 
     rellenapedido(idpedido);
   } else {
-    document.getElementById("idId").value = "Nuevo pedido";
+    document.getElementById("idId").value = "Nuevo Pedido";
     document.getElementById("idSalvar").disabled = false;
   }
 
@@ -59,7 +59,7 @@ function salvarpedido(evt) {
     pedido[input.name] = input.value;
   }
 
-  if (pedido.id == "Nuevo pedido") { // Añadimos pedido
+  if (pedido.id == "Nuevo Pedido") { // Añadimos pedido
     delete pedido.id;
     opciones = {
       method: "POST", // Añadimos un registro a la BBDD
