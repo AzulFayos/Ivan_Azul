@@ -23,7 +23,7 @@ function init() {
 
   // El boton de salvar sólo está activo cuando se carge los datos de un pedido
   // document.getElementById("idSalvar").addEventListener("click", salvarpedido);
-  document.getElementById("idFormpedido").addEventListener("submit", salvarpedido);
+  document.getElementById("idFormPedido").addEventListener("submit", salvarpedido);
 }
 
 function rellenapedido(idpedido) {
