@@ -1,4 +1,4 @@
-
+const BPUrl="http://localhost:8080/Ivan_Azul/pedidos";
 const myModal = new bootstrap.Modal(document.getElementById("idModal")); // Para los mensajes de error y avisos
 const modalWait = new bootstrap.Modal(document.getElementById("idModalWait")); // Para los mensajes de error y avisos
 
@@ -101,7 +101,7 @@ function borrarpedidoAPI(idpedido) {
     method: "DELETE", // Modificamos la BBDD
   };
 
-  fetch(URL + "/" + idpedido, opciones)
+  fetch(BPUrl + "/" + idpedido, opciones)
     .then((respuesta) => {
       if (respuesta.ok) {
         return respuesta.json();

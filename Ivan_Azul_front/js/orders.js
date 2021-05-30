@@ -1,4 +1,5 @@
 const URL = "http://localhost:8080/Ivan_Azul/pedidos";
+
 const myModal = new bootstrap.Modal(document.getElementById("idModal")); // Para los mensajes de error y avisos
 const modalWait = new bootstrap.Modal(document.getElementById("idModalWait")); // Para los mensajes de error y avisos
 
