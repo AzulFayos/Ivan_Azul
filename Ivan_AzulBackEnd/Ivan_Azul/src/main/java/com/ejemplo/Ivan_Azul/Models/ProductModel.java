@@ -50,7 +50,41 @@ public class ProductModel {
 	    };
 	    
 	} catch (SQLException e) {
-	    System.err.println("Error en read de Clientes: " + e.getMessage());
+	    System.err.println("Error en read de productos: " + e.getMessage());
+	    return null;
+	}
+
+	return Product;
+    }
+    
+    public Product readbyPedido(Integer order_id) {
+    	Product Product = null;
+	Statement sentencia = null;
+
+	String sql = "select * from products p join order_details od on p.id = od.product_id where order_id = " + order_id;
+	try {
+	    sentencia = conexion.createStatement();
+	    ResultSet rs = sentencia.executeQuery(sql);
+	    while (rs.next()) { // Si hay un cliente que existe
+	    Product = new Product(
+	    	rs.getString("supplier_ids"),
+			rs.getInt("id"),
+			rs.getString("product_code"),
+			rs.getString("product_name"),
+			rs.getString("description"),
+			rs.getFloat("standard_cost"),
+			rs.getFloat("list_price"),
+			rs.getInt("reorder_level"),
+			rs.getInt("target_level"),
+			rs.getString("quantity_per_unit"),
+			rs.getInt("discontinued"),
+			rs.getInt("minimum_reorder_quantity"),
+			rs.getString("category"),
+			rs.getBlob("attachments"));
+	    };
+	    
+	} catch (SQLException e) {
+	    System.err.println("Error en read de productos: " + e.getMessage());
 	    return null;
 	}
 
@@ -94,7 +128,7 @@ public class ProductModel {
 	    }
 
 	} catch (SQLException e) {
-	    System.err.println("Error al insertar Customer: " + e.getMessage());
+	    System.err.println("Error al insertar producto: " + e.getMessage());
 	    throw e;
 	}
 
@@ -114,7 +148,7 @@ public class ProductModel {
 	    resultado = (ps.executeUpdate() > 0);
 
 	} catch (SQLException e) {
-	    System.err.println("Error al borrar Cliente: " + e.getMessage());
+	    System.err.println("Error al borrar producto: " + e.getMessage());
 	    throw e;
 	}
 
@@ -159,7 +193,7 @@ public class ProductModel {
 	    resultado = (ps.executeUpdate() > 0);
 
 	} catch (SQLException e) {
-	    System.err.println("Error al actualizar Cliente: " + e.getMessage());
+	    System.err.println("Error al actualizar producto: " + e.getMessage());
 	    throw e;
 	}
 
@@ -202,7 +236,43 @@ public class ProductModel {
 	    			rs.getBlob("attachments")));
 	    };
 	} catch (SQLException e) {
-	    System.err.println("Error en read de Clientes: " + e.getMessage());
+	    System.err.println("Error en read de productos: " + e.getMessage());
+	    return null;
+	}
+
+	return Product;
+    }
+    
+    public ArrayList<Product> listaProductosPedidos(Integer order_id)
+
+    {
+	ArrayList<Product> Product = new ArrayList<Product>();
+	Statement sentencia = null;
+
+	String sql = "select * from products p join order_details od on p.id = od.product_id where order_id = " + order_id;
+
+	try {
+	    sentencia = conexion.createStatement();
+	    ResultSet rs = sentencia.executeQuery(sql);
+	    while (rs.next()) { // Si todavía hay un cliente lo añado al array
+	    	Product.add(new Product(
+	    			rs.getString("supplier_ids"),
+	    			rs.getInt("id"),
+	    			rs.getString("product_code"),
+	    			rs.getString("product_name"),
+	    			rs.getString("description"),
+	    			rs.getFloat("standard_cost"),
+	    			rs.getFloat("list_price"),
+	    			rs.getInt("reorder_level"),
+	    			rs.getInt("target_level"),
+	    			rs.getString("quantity_per_unit"),
+	    			rs.getInt("discontinued"),
+	    			rs.getInt("minimum_reorder_quantity"),
+	    			rs.getString("category"),
+	    			rs.getBlob("attachments")));
+	    };
+	} catch (SQLException e) {
+	    System.err.println("Error en read de productos: " + e.getMessage());
 	    return null;
 	}
 

@@ -15,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.ejemplo.Ivan_Azul.Entities.Order;
 import com.ejemplo.Ivan_Azul.Entities.Product;
 import com.ejemplo.Ivan_Azul.Models.ProductModel;
 
@@ -59,6 +60,22 @@ public class ProductRest {
 			Product producto = products.read(id);
 		    if (producto != null) {
 			respuesta = Response.status(Response.Status.OK).entity(producto).build();
+		    }
+		}
+		return respuesta;
+	    }
+	    
+	    @GET
+	    @Path("/pedido/{order_id}")
+	    @Produces(MediaType.APPLICATION_JSON)
+	    public Response readbyPedido(@PathParam("order_id") Integer customer_id) {
+		
+		Response respuesta = Response.status(Response.Status.NOT_FOUND).entity("No he encotrado").build();
+		
+		if (products != null) {
+			 ArrayList<Product> listaProductosPedidos = products.listaProductosPedidos(customer_id);
+			    if (listaProductosPedidos != null) {
+				respuesta = Response.status(Response.Status.OK).entity(listaProductosPedidos).build();
 		    }
 		}
 		return respuesta;
