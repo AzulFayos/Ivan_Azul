@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pedidos Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="./css/index.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./index.html">Listado de </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item" href="./index.html">Cliente</a></li>
+                <li><a class="dropdown-item" href="./orders.html">Pedidos</a></li>
+                <li><a class="dropdown-item" href="./product.html">Product</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row justify-content-between ">
+        <div class="col-10 mb-3 mt-3">
+          <h1 >Cesta<span id="name" class="display-6"></span></h1>
+        </div>
+       
+        <div class="col-1  mx-4 ">
+          <h1 class="p-2 bd-highlight">
+            <i class="bi bi-plus-circle-fill text-primary" id="idAddPedido"></i>
+          </h1> 
+        </div>
+    </div>
+      <table class="table table-responsive table-sm">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Coste €</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Cantidad/Unidad</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="id_tblPedidos"></tbody>
+      </table>
+
+      <!-- Modal para mensajes -->
+      <div class="modal" id="idModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 id="idMdlTitle" class="modal-title">Mensaje</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p id="idMdlMsg">Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                id="idMdlClose"
+                type="button"
+                class="btn"
+                style="background-color: #ffc107"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+              <button id="idMdlOK" type="button" class="btn btn-primary">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal para wait -->
+      <div class="modal" id="idModalWait" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body d-flex justify-content-center">
+              <div class="loader"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/productosPedido.js"></script>
+  </body>
+</html>

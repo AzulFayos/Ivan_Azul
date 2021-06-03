@@ -7,11 +7,11 @@ window.onload = init;
 function init() {
     const queryStr = window.location.search.substring(1);
     const parametro = queryStr.split("=");
-    let idcliente = parametro[1];
-    const URL = "http://localhost:8080/Ivan_Azul/pedidos/cliente/";
-    rellenapedido(idcliente,URL);
-  function rellenapedido(idcliente,URL) {
-  const peticionHTTP = fetch(URL+ idcliente);
+    let idpedido = parametro[1];
+    const URL = "http://localhost:8080/Ivan_Azul/productos/pedido/";
+    rellenapedido(idpedido,URL);
+  function rellenapedido(idpedido,URL) {
+  const peticionHTTP = fetch(URL+ idpedido);
 
   peticionHTTP
     .then((respuesta) => {
@@ -19,53 +19,32 @@ function init() {
         return respuesta.json();
       } else throw new Error("Return not ok");
     })
-    .then((pedidos) => {
+    .then((productos) => {
       let tblBody = document.getElementById("id_tblPedidos");
-      for (const pedido of pedidos) {
+      for (const products of productos) {
         let fila = document.createElement("tr");
         let elemento = document.createElement("td");
-       
-        elemento.innerHTML = pedido.id;
+        elemento.innerHTML = products.id;
         fila.appendChild(elemento);
         elemento = document.createElement("td");
-        elemento.innerHTML = pedido.ship_name;
+        elemento.innerHTML = products.product_name;
+        fila.appendChild(elemento);
         fila.appendChild(elemento);
         elemento = document.createElement("td");
-        elemento.innerHTML = pedido.ship_address;
+        elemento.innerHTML = products.list_price;
         fila.appendChild(elemento);
         elemento = document.createElement("td");
-        elemento.innerHTML = pedido.ship_city;
+        elemento.innerHTML = products.category ?? "";
         fila.appendChild(elemento);
         elemento = document.createElement("td");
-        elemento.innerHTML = pedido.ship_country_region ?? "";
+        elemento.innerHTML = products.quantity_per_unit ?? "";
         fila.appendChild(elemento);
         elemento = document.createElement("td");
-        elemento.innerHTML = pedido.ship_state_province ?? "";
-        fila.appendChild(elemento);
-        elemento = document.createElement("td");
-        elemento.innerHTML = pedido.ship_zip_postal_code ?? "";
-        fila.appendChild(elemento);
-        
-        elemento = document.createElement("td");
-        elemento.innerHTML = pedido.shipping_fee ?? "";
-        fila.appendChild(elemento);
-        elemento = document.createElement("td");
-        elemento.innerHTML = pedido.taxes ?? "";
-        fila.appendChild(elemento);
-        elemento = document.createElement("td")?? "";
-/*
-        let idcliente = pedido.id;
-        fila.appendChild(elemento);
-        elemento = document.createElement("td");
-*/
         elemento.innerHTML =
-          `<button class="btn btn-link" onclick="editapedido(${pedido.id})"><i class="bi-pencil"></i></button>` +
-          `<button style="color:red;" class="btn btn-link"  onclick="borrarpedido(${pedido.id})"><i class="bi-x-circle"></i></button>`+
-          `<button class="btn btn-Dark" onclick="productospedido(${pedido.id})"><i class="bi bi-card-list"></i></button>` ;
+          `<button style="color:red;" class="btn btn-link"  onclick="borrarpedido(${products.id})"><i class="bi-x-circle"></i></button>`;
         fila.appendChild(elemento);
 
         tblBody.appendChild(fila);
-        document.getElementById("name").innerHTML=pedido.ship_name;
       }
       
 
@@ -83,7 +62,7 @@ function editapedido(idpedido) {
 }
 
 function productospedido(idpedido) {
-  window.location.href = `productosPedido.html?idpedido=${idpedido}`;
+  window.location.href = `editarPedido.html?idpedido=${idpedido}`;
 }
 
 function addpedido() {
