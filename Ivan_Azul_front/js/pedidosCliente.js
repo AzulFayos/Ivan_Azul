@@ -71,7 +71,7 @@ function init() {
 
       // Todo ha ido bien hast aquí, habilito el boton de añadir pedido
 
-      document.getElementById("idAddPedido").addEventListener("click", addpedido);
+      
     })
     .catch((error) => {
       muestraMsg("¡M**rd!", "¡No he podido recuperar el listado de pedidos!<br>" + error, false, "error");
@@ -87,7 +87,7 @@ function productospedido(idpedido) {
 }
 
 function addpedido() {
-  window.location.href = "editarpedido.html";
+  window.location.href = "editarpedido.html"; 
 }
 
 function borrarpedido(idpedido) {

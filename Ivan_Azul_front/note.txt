@@ -1,5 +1,0 @@
-const UROLD = "http://localhost:8080/Ivan_Azul/clientes/id";
-
-for (var titulo in URLOD){
-    $(".contSelf").append("<h1 > " + title + "</h1>");
-}
