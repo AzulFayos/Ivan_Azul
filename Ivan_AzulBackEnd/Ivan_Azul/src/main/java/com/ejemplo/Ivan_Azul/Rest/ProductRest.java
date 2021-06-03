@@ -15,7 +15,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.ejemplo.Ivan_Azul.Entities.Order;
 import com.ejemplo.Ivan_Azul.Entities.Product;
 import com.ejemplo.Ivan_Azul.Models.ProductModel;
 

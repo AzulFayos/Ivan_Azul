@@ -112,7 +112,7 @@ public class Order_DetailsModel {
 		PreparedStatement ps = null;
 		String sql = "UPDATE order_details set " + "order_id = ?, " + "product_id = ?, " + "quantity = ?, "
 				+ "unit_price = ?, " + "discount = ?, " + "status_id  = ?, " + "date_allocated = ?, "
-				+ "purchase_order_id = ?, " + "inventory_id = ?, " + "where id = ? on update cascade";
+				+ "purchase_order_id = ?, " + "inventory_id = ?, " + "where id = ?";
 		try {
 			ps = conexion.prepareStatement(sql);
 			ps.setInt(1, Order_Details.getOrder_id());
@@ -124,6 +124,7 @@ public class Order_DetailsModel {
 			ps.setTimestamp(7, Order_Details.getDate_allocated());
 			ps.setInt(8, Order_Details.getPurchase_order_id());
 			ps.setInt(9, Order_Details.getInventory_id());
+			ps.setInt(10, Order_Details.getId());
 
 			resultado = (ps.executeUpdate() > 0);
 

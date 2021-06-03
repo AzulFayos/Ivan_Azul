@@ -189,6 +189,7 @@ public class ProductModel {
 	    ps.setInt(11, Product.getMinimum_reorder_quantity());
 	    ps.setString(12, Product.getCategory());
 	    ps.setBlob(13, Product.getAttachments());
+	    ps.setInt(14, Product.getId());
 
 	    resultado = (ps.executeUpdate() > 0);
 
